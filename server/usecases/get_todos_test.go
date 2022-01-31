@@ -32,9 +32,9 @@ func (badTodosRepo) GetAllTodos() ([]entities.Todo, error) {
 	return nil, fmt.Errorf("Panic, something went wrong")
 }
 
-type mockTodosRepo struct {}
+type MockTodosRepo struct {}
 
-func (mockTodosRepo) GetAllTodos() ([]entities.Todo, error) {
+func (MockTodosRepo) GetAllTodos() ([]entities.Todo, error) {
 	return dummyTodos, nil
 }
 
@@ -54,7 +54,7 @@ func TestGetTodos(t *testing.T) {
 		}
 	})
 	t.Run("Returns todos from TodosRepository", func(t *testing.T) {
-		repo := new(mockTodosRepo)
+		repo := new(MockTodosRepo)
 
 		todos, err := usecases.GetTodos(repo)
 
