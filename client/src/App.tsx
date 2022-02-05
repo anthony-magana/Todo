@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { Box, Button, Text} from '@chakra-ui/react'
 import Header from './components/Header';
-import TodoList from './components/TodoList';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
+import TodoForm from './components/TodoForm';
 
 function App() {
   const [signUp, setSignUp] = useState<boolean>(false);
   const [login, setLogin] = useState<boolean>(false);
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [authenticated, setAuthenticated] = useState<boolean>(true);
   const [name, setName] = useState<string>('');
 
   const handleAuthenticated = (b: boolean) => {
@@ -66,11 +66,11 @@ function App() {
 
       {authenticated && 
         <Box mt='100px'>
-          <Box display='flex' justifyContent='space-around'>
-            <Text textAlign='center'> hi {name}, add some todos!</Text>
+          <Box display='flex' justifyContent='space-around' mb='10'>
+            <Text textAlign='center' fontSize='large'> hi {name}, add some todos!</Text>
             <Button onClick={handleLogout}>Logout?</Button>
           </Box>
-          <TodoList todos={[{title: 'hello world', description: 'it is a lovely day', completed: false}, {title: 'garbage', description:'Take out garbage', completed: true}]} />
+          <TodoForm />
         </Box>
       }
     </Box>

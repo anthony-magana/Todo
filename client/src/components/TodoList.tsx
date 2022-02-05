@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 import Todos from './Todos';
 
 type Props = {
-    todos: Todo[]
+    todos: Todo[],
 }
 
 const TodoList: React.FC<Props> = ({ todos }) => {
