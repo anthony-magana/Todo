@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import { Input, Box, Button, InputGroup, Text } from '@chakra-ui/react';
-import TodoList from './TodoList';
-import { Todo } from '../types/Todo';
+import { useTodoContext } from '../context/TodoProvider';
 
 const TodoForm = () => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [completed, setCompleted] = useState<boolean>(false);
-    const [todos, setTodos] = useState<Todo[]>([]);
+    const { todos, addTodo } = useTodoContext();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setTitle('')
         setDescription('')
-        setTodos([...todos, {title, description, completed}])
+        const id: number = todos.length + 1;
+        addTodo({id, title, description, completed})
     }
     
   return (
@@ -33,7 +33,6 @@ const TodoForm = () => {
                 <Button width='100%' type="submit">Add</Button>
             </Box>
         </form>
-        <TodoList todos={todos} />
     </>
   );
 };

@@ -4,11 +4,13 @@ import Header from './components/Header';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import TodoForm from './components/TodoForm';
+import TodoProvider from './context/TodoProvider';
+import TodoList from './components/TodoList';
 
 function App() {
   const [signUp, setSignUp] = useState<boolean>(false);
   const [login, setLogin] = useState<boolean>(false);
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [authenticated, setAuthenticated] = useState<boolean>(true);
   const [name, setName] = useState<string>('');
 
   const handleAuthenticated = (b: boolean) => {
@@ -70,7 +72,10 @@ function App() {
             <Text textAlign='center' fontSize='large'> hi {name}, add some todos!</Text>
             <Button onClick={handleLogout}>Logout?</Button>
           </Box>
-          <TodoForm />
+          <TodoProvider>
+            <TodoForm />
+            <TodoList />
+          </TodoProvider>
         </Box>
       }
     </Box>
