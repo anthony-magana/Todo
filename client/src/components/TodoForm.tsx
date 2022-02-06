@@ -5,7 +5,6 @@ import { useTodoContext } from '../context/TodoProvider';
 const TodoForm = () => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [completed, setCompleted] = useState<boolean>(false);
     const { todos, addTodo } = useTodoContext();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -13,6 +12,7 @@ const TodoForm = () => {
         setTitle('')
         setDescription('')
         const id: number = todos.length + 1;
+        const completed: boolean = false;
         addTodo({id, title, description, completed})
     }
     

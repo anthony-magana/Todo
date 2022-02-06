@@ -10,7 +10,7 @@ import TodoList from './components/TodoList';
 function App() {
   const [signUp, setSignUp] = useState<boolean>(false);
   const [login, setLogin] = useState<boolean>(false);
-  const [authenticated, setAuthenticated] = useState<boolean>(true);
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
 
   const handleAuthenticated = (b: boolean) => {
