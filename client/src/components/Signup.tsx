@@ -13,7 +13,7 @@ const Signup:React.FC<Props> = ({auth}) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/register', {
+            const res = await fetch(`${process.env.REACT_APP_ENDPOINT}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

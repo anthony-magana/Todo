@@ -25,9 +25,10 @@ function App() {
     (
       async () => {
         try {
-          const response = await fetch('http://localhost:5000/api/user', {
+          const response = await fetch(`${process.env.REACT_APP_ENDPOINT}/user`, {
             method: 'GET',
-            credentials: 'include'
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
           });
 
           const data = await response.json();
@@ -46,8 +47,9 @@ function App() {
   const handleLogout = async () => {
     setAuthenticated(false);
     setName('');
-    await fetch('http://localhost:5000/api/logout', {
+    await fetch(`${process.env.REACT_APP_ENDPOINT}/logout`, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
     });
   }

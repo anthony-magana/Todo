@@ -12,7 +12,7 @@ const Signin:React.FC<Props> = ({auth}) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/login', {
+      const res = await fetch(`${process.env.REACT_APP_ENDPOINT}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ const Signin:React.FC<Props> = ({auth}) => {
         })
       });
       const data = await res.json();
-      if(data.message == 'Success'){
+      if(data.message === 'Success'){
         auth(true);
       }
     } catch(err) {

@@ -118,6 +118,7 @@ func Logout(c *fiber.Ctx) error {
 		Value:    "",
 		Expires:  time.Now().Add(-1 * time.Hour),
 		HTTPOnly: true,
+		SameSite: "none",
 	}
 
 	c.Cookie(&cookie)
