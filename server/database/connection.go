@@ -21,8 +21,9 @@ func Connect() {
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbName := os.Getenv("DB_NAME")
+	dbHost := os.Getenv("DB_HOST")
 
-	dsn := fmt.Sprintf("%s:%s@/%s", dbUser, dbPassword, dbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", dbUser, dbPassword, dbHost, dbName)
 
 	connection, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
