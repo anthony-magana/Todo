@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"os"
 	"strconv"
 	"time"
 
@@ -12,7 +11,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-var SecretKey = os.Getenv("JWT_SECRET")
+const SecretKey = "secret"
 
 func Register(c *fiber.Ctx) error {
 	var data map[string]string
