@@ -3,6 +3,8 @@ package main
 import (
 	// "./database"
 	// "./routes"
+	"os"
+
 	"github.com/anthony-magana/todo/server/database"
 	"github.com/anthony-magana/todo/server/routes"
 	"github.com/gofiber/fiber/v2"
@@ -21,5 +23,7 @@ func main() {
 
 	routes.Setup(app)
 
-	app.Listen(":5000")
+	port := os.Getenv("PORT")
+
+	app.Listen(":" + port)
 }

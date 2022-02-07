@@ -1,6 +1,9 @@
 package database
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/anthony-magana/todo/server/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -9,7 +12,19 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	connection, err := gorm.Open(mysql.Open("root:password@/go_auth"), &gorm.Config{})
+	// er := godotenv.Load(".env")
+
+	// if er != nil {
+	// 	log.Fatalf("Error loading .env file")
+	// }
+
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
+
+	dsn := fmt.Sprintf("%s:%s@/%s", dbUser, dbPassword, dbName)
+
+	connection, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic("failed to connect database")

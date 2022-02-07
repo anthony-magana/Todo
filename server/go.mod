@@ -1,5 +1,6 @@
 module github.com/anthony-magana/todo/server
 
+// +heroku goVersion go1.17
 go 1.17
 
 require github.com/gofiber/fiber/v2 v2.25.0
@@ -10,6 +11,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
+	github.com/joho/godotenv v1.4.0
 	github.com/klauspost/compress v1.13.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.32.0 // indirect
