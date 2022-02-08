@@ -19,7 +19,8 @@ Todo App created with React and typescript on the front end with golang on the b
 - [Typescript](https://create-react-app.dev/docs/adding-typescript/) - typed superset of JavaScript that compiles to plain JavaScript.
 - [ChakraUI](https://chakra-ui.com) - React component library
 - [JWT](https://pkg.go.dev/github.com/dgrijalva/jwt-go/v4#section-readme) - JWT for Authentication
-- [MongoDB](https://www.mongodb.com) - MYSQL Database ([ClearDB](https://www.cleardb.com) add on, on Heroku)
+- [MySQL](https://dev.mysql.com/doc/) - MySQL Database ([ClearDB](https://www.cleardb.com) add on, on Heroku)
+- [Gorm](https://gorm.io/) - ORM library for go ([Gorm_Mysql](https://gorm.io/docs/connecting_to_the_database.html) version)
 - [Heroku](https://id.heroku.com/) - Server and DB hosting service
 
 ## 🔧 Getting Started
