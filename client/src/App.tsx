@@ -4,15 +4,15 @@ import Header from './components/Header';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import TodoForm from './components/TodoForm';
-import TodoProvider from './context/TodoProvider';
 import TodoList from './components/TodoList';
+import { useTodoContext } from './context/TodoProvider';
 
 function App() {
   const [signUp, setSignUp] = useState<boolean>(false);
   const [login, setLogin] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
-
+  const { setDbTodos } = useTodoContext();
   const handleAuthenticated = (b: boolean) => {
     if(b) {
       setLogin(false);
@@ -33,16 +33,16 @@ function App() {
 
           const data = await response.json();
           console.log(data);
-          if(data.id) {
+          if(data.user) {
             setAuthenticated(true);
-            setName(data.name);
+            setName(data.user.name);
+            setDbTodos(data.todos);
           }
         } catch(err) {
           console.log(err);
         }
       })();
-
-  }, [])
+  }, [authenticated]);
   
   const handleLogout = async () => {
     setAuthenticated(false);
@@ -74,10 +74,8 @@ function App() {
             <Text textAlign='center' fontSize='large'> hi {name}, add some todos!</Text>
             <Button onClick={handleLogout}>Logout?</Button>
           </Box>
-          <TodoProvider>
-            <TodoForm />
-            <TodoList />
-          </TodoProvider>
+          <TodoForm />
+          <TodoList />
         </Box>
       }
     </Box>

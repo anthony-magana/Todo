@@ -24,6 +24,7 @@ const Signin:React.FC<Props> = ({auth}) => {
         })
       });
       const data = await res.json();
+      console.log("signin data: ", data)
       if(data.message === 'Success'){
         auth(true);
       }

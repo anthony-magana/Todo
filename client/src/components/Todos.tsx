@@ -17,15 +17,29 @@ const Todos: React.FC<props> = ({title, description, completed, id}) => {
   const borderColor = (colorMode === 'light' ? 'blue.300' : 'blue.600')
   const { removeTodo, updateCompleted } = useTodoContext();
 
+  const handleDelete = () => {
+    if(window.confirm('Are you sure you want to delete this todo?') && id) {
+      removeTodo(id);
+    }
+  }
+
+  const handleCheckbox = (e: React.BaseSyntheticEvent) => {
+    e.preventDefault();
+    if(id) {
+      updateCompleted(id, e.target.checked);
+    }
+  }
+
   return (
     <Box as='article' display='flex' w='70%' m='0 auto' alignItems='center' alignContent='center' justifyContent='space-between' mt='25px' backgroundColor={bgColor} p='20px'>
         <Box as='section' pr='25px' flexWrap='wrap'>
             <Heading as='h3' size='md' mb='5px'>Title: {title}</Heading>
             <Box as='p'>Description: {description}</Box>
+            {completed && <Box as='p' color='green.500'>{completed}</Box>}
         </Box>
         <Box as='section' display='flex' alignItems='center'>
-            <Checkbox borderColor={borderColor} checked={completed} onChange={() => updateCompleted(id, !completed)} mr='10' />
-            <IconButton icon={<DeleteIcon />} onClick={() => removeTodo(id)} aria-label='delete' size='sm' color='red.500'/>
+            <Checkbox borderColor={borderColor} checked={completed} onChange={handleCheckbox}  mr='10' />
+            <IconButton icon={<DeleteIcon />} aria-label='delete' onClick={handleDelete} size='sm' color='red.500'/>
         </Box>
     </Box>
   );

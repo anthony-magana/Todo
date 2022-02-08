@@ -13,6 +13,8 @@ import (
 
 const SecretKey = "secret"
 
+var UserId uint
+
 func Register(c *fiber.Ctx) error {
 	var data map[string]string
 	err := c.BodyParser(&data)
@@ -53,6 +55,8 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
+	UserId = user.ID
+
 	if err := bcrypt.CompareHashAndPassword(user.Password, []byte(data["password"])); err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{
@@ -79,7 +83,7 @@ func Login(c *fiber.Ctx) error {
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
-		SameSite: "none",
+		// SameSite: "none",
 	}
 
 	c.Cookie(&cookie)
@@ -105,11 +109,19 @@ func User(c *fiber.Ctx) error {
 
 	claims := token.Claims.(jwt.MapClaims)
 
+	// gets user from database
 	var user models.User
 
 	database.DB.Where("id = ?", claims["issuer"]).First(&user)
 
-	return c.JSON(user)
+	// get todos of user from database and set it to todos
+	var todos []models.Todo
+	database.DB.Where("user_id = ?", user.ID).Find(&todos)
+
+	return c.JSON(fiber.Map{
+		"user":  user,
+		"todos": todos,
+	})
 }
 
 func Logout(c *fiber.Ctx) error {
